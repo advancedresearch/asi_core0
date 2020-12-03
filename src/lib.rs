@@ -189,14 +189,14 @@ pub enum Error {
         /// The sensor that sent the error.
         sensor: SensorId,
         /// The error sent from sensor.
-        error: Box<::std::error::Error>
+        error: Box<dyn ::std::error::Error>
     },
     /// Something is wrong with the actuator.
     Actuator {
         /// The actuator that sent the error.
         actuator: ActuatorId,
         /// The error sent from the actuator.
-        error: Box<::std::error::Error>
+        error: Box<dyn ::std::error::Error>
     },
     /// Not enough memory.
     /// Includes the number of slots allocated.
@@ -307,7 +307,7 @@ pub trait Sensor<T> {
     /// Call for next input.
     fn next(&mut self);
     /// Try receive data, returns `None` if there is nothing to receive yet.
-    fn try_receive(&mut self) -> Option<Result<T, Box<::std::error::Error>>>;
+    fn try_receive(&mut self) -> Option<Result<T, Box<dyn ::std::error::Error>>>;
 }
 
 /// Implemented by actuators.
@@ -316,7 +316,7 @@ pub trait Actuator<T> {
     fn send(&mut self, data: &T);
     /// Try to confirm that data is received, return `None` if nothing to confirm.
     /// Confirmations are expected to arrive in same order as data was sent.
-    fn try_confirm(&mut self) -> Option<Result<(), Box<::std::error::Error>>>;
+    fn try_confirm(&mut self) -> Option<Result<(), Box<dyn ::std::error::Error>>>;
 }
 
 /// Implemented by runtimes for agents.

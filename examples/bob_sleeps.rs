@@ -30,7 +30,7 @@ pub enum Sensor {}
 
 impl asi::Sensor<()> for Sensor {
     fn next(&mut self) {}
-    fn try_receive(&mut self) -> Option<Result<(), Box<::std::error::Error>>> {None}
+    fn try_receive(&mut self) -> Option<Result<(), Box<dyn ::std::error::Error>>> {None}
 }
 
 /// Bob's actuators.
@@ -58,7 +58,7 @@ impl asi::Actuator<()> for Actuator {
             }
         }
     }
-    fn try_confirm(&mut self) -> Option<Result<(), Box<::std::error::Error>>> {
+    fn try_confirm(&mut self) -> Option<Result<(), Box<dyn ::std::error::Error>>> {
         match *self {
             Actuator::INeedJustFiveMinutes(ref mut state) => {
                 if *state == true {
