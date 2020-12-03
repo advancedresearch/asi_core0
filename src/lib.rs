@@ -295,7 +295,7 @@ pub trait DecisionMaker<T> {
     /// Receiving feedback when something new happens.
     fn feedback(&mut self, res: Result<Feedback, Error>);
 
-    /// Return estimate of how it takes to shut down from now, given a deadline.
+    /// Return estimate of how long it takes to shut down from now, given a deadline.
     /// This is `0` if the decison maker is ready to shut down.
     /// When this is called, the decision maker should start preparing for shutdown.
     /// It might be called multiple times to check how the decision maker is preparing.
